@@ -38,12 +38,17 @@ class Warga extends CI_Controller
         $this->template->back_end('back_end/v_data_wargartrw', $data);
     }
 
-    public function keluarga($id_warga)
+    public function keluarga($id_warga = null)
     {
-        $data['data_pribadi'] = $this->DataHandle->other_query("SELECT tr_rumah.status_menempati, tr_rumah.status_rumah, tr_rumah.no_rumah, ms_blok.nama_blok, tbl_warga.id_warga, tbl_warga.nik, tbl_warga.nama_lengkap, tbl_warga.tempat_lahir, tbl_warga.tanggal_lahir, tbl_warga.kontak, tbl_warga.email, tbl_warga.jk, tbl_warga.gol_darah, tbl_warga.agama, tbl_warga.status_perkawinan, tbl_warga.pekerjaan, tbl_warga.`status`, tbl_warga.foto FROM tr_rumah INNER JOIN ms_blok ON tr_rumah.id_blok = ms_blok.id_blok INNER JOIN tbl_warga ON tbl_warga.id_warga = tr_rumah.id_warga WHERE tr_rumah.status='1' AND tr_rumah.id_warga = '" . $id_warga . "' ORDER BY tr_rumah.id_warga DESC");
-        $data['data_keluarga'] = $this->DataHandle->getAllWhere('tbl_keluarga', '*', "status = '1' AND id_warga='" . $id_warga . "'", "id_keluarga ASC");
-        $data['id_warga'] = $id_warga;
-        $this->template->back_end('back_end/v_data_keluarga', $data);
+        if ($id_warga) :
+            $id_warga = de_crypt($id_warga);
+            $data['data_pribadi'] = $this->DataHandle->other_query("SELECT tr_rumah.status_menempati, tr_rumah.status_rumah, tr_rumah.no_rumah, ms_blok.nama_blok, tbl_warga.id_warga, tbl_warga.nik, tbl_warga.nama_lengkap, tbl_warga.tempat_lahir, tbl_warga.tanggal_lahir, tbl_warga.kontak, tbl_warga.email, tbl_warga.jk, tbl_warga.gol_darah, tbl_warga.agama, tbl_warga.status_perkawinan, tbl_warga.pekerjaan, tbl_warga.`status`, tbl_warga.foto FROM tr_rumah INNER JOIN ms_blok ON tr_rumah.id_blok = ms_blok.id_blok INNER JOIN tbl_warga ON tbl_warga.id_warga = tr_rumah.id_warga WHERE tr_rumah.status='1' AND tr_rumah.id_warga = '" . $id_warga . "' ORDER BY tr_rumah.id_warga DESC");
+            $data['data_keluarga'] = $this->DataHandle->getAllWhere('tbl_keluarga', '*', "status = '1' AND id_warga='" . $id_warga . "'", "id_keluarga ASC");
+            $data['id_warga'] = $id_warga;
+            $this->template->back_end('back_end/v_data_keluarga', $data);
+        else :
+            redirect('Warga');
+        endif;
     }
 
     public function data_keluarga($id_warga)
@@ -306,21 +311,29 @@ class Warga extends CI_Controller
         }
     }
 
-    public function delete($id_warga)
+    public function delete($id_warga = null)
     {
-        $id_user = $this->session->userdata('id_user');
-        $data = array(
-            'status' => '0',
-            'updated_by' => $id_user
-        );
-        $where = array(
-            'id_warga' => $id_warga
-        );
-        $this->DataHandle->edit($this->nama_tabel, $data, $where);
-        $this->DataHandle->edit($this->nama_tabel4, $data, $where);
-        $this->session->set_flashdata('msg', '<script> swal("Delete Success!", "Data Berhasil Dihapus ...", "success"); </script>');
+        if ($id_warga) :
+            $id_warga = de_crypt($id_warga);
 
-        redirect('Warga');
+            $id_user = $this->session->userdata('id_user');
+            $data = array(
+                'status' => '0',
+                'updated_by' => $id_user
+            );
+            $where = array(
+                'id_warga' => $id_warga
+            );
+            $this->DataHandle->edit($this->nama_tabel, $data, $where);
+            $this->DataHandle->edit($this->nama_tabel4, $data, $where);
+            $this->session->set_flashdata('msg', '<script> swal("Delete Success!", "Data Berhasil Dihapus ...", "success"); </script>');
+
+            redirect('Warga');
+        else :
+            $this->session->set_flashdata('msg', '<script> swal("Maaf", "Terjadi Kesalahan", "info"); </script>');
+            redirect('Warga');
+
+        endif;
     }
 
     public function delete_keluarga($id_keluarga, $id_warga)
@@ -342,9 +355,14 @@ class Warga extends CI_Controller
 
     public function get_data($id_warga)
     {
-        $data['data_blok'] = $this->DataHandle->getAllWhere($this->nama_tabel2, '*', "status = '1'", "nama_blok ASC");
-        $data['data_pribadi'] = $this->DataHandle->other_query("SELECT tr_rumah.status_menempati, tr_rumah.status_rumah, tr_rumah.no_rumah, ms_blok.nama_blok,ms_blok.id_blok, tbl_warga.id_warga, tbl_warga.nik, tbl_warga.nama_lengkap, tbl_warga.tempat_lahir, tbl_warga.tanggal_lahir, tbl_warga.kontak, tbl_warga.email, tbl_warga.jk, tbl_warga.gol_darah, tbl_warga.agama, tbl_warga.status_perkawinan, tbl_warga.pekerjaan, tbl_warga.`status`, tbl_warga.foto FROM tr_rumah INNER JOIN ms_blok ON tr_rumah.id_blok = ms_blok.id_blok INNER JOIN tbl_warga ON tbl_warga.id_warga = tr_rumah.id_warga WHERE tr_rumah.status='1' AND tr_rumah.id_warga = '" . $id_warga . "' ORDER BY tr_rumah.id_warga DESC");
-        $this->template->back_end('back_end/v_edit_warga', $data);
+        if ($id_warga) :
+            $id_warga = de_crypt($id_warga);
+            $data['data_blok'] = $this->DataHandle->getAllWhere($this->nama_tabel2, '*', "status = '1'", "nama_blok ASC");
+            $data['data_pribadi'] = $this->DataHandle->other_query("SELECT tr_rumah.status_menempati, tr_rumah.status_rumah, tr_rumah.no_rumah, ms_blok.nama_blok,ms_blok.id_blok, tbl_warga.id_warga, tbl_warga.nik, tbl_warga.nama_lengkap, tbl_warga.tempat_lahir, tbl_warga.tanggal_lahir, tbl_warga.kontak, tbl_warga.email, tbl_warga.jk, tbl_warga.gol_darah, tbl_warga.agama, tbl_warga.status_perkawinan, tbl_warga.pekerjaan, tbl_warga.`status`, tbl_warga.foto FROM tr_rumah INNER JOIN ms_blok ON tr_rumah.id_blok = ms_blok.id_blok INNER JOIN tbl_warga ON tbl_warga.id_warga = tr_rumah.id_warga WHERE tr_rumah.status='1' AND tr_rumah.id_warga = '" . $id_warga . "' ORDER BY tr_rumah.id_warga DESC");
+            $this->template->back_end('back_end/v_edit_warga', $data);
+        else :
+            redirect('Warga');
+        endif;
     }
 
     public function get_data_keluarga($id_keluarga, $id_warga)
