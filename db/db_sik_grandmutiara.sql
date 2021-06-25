@@ -1,21 +1,38 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Mysql
+ Source Server         : Localhost
  Source Server Type    : MySQL
- Source Server Version : 100119
+ Source Server Version : 100418
  Source Host           : localhost:3306
- Source Schema         : db_sikf1f8
+ Source Schema         : db_sik_grandmutiara
 
  Target Server Type    : MySQL
- Target Server Version : 100119
+ Target Server Version : 100418
  File Encoding         : 65001
 
- Date: 08/11/2019 09:07:17
+ Date: 25/06/2021 09:09:33
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for log_kegiatan
+-- ----------------------------
+DROP TABLE IF EXISTS `log_kegiatan`;
+CREATE TABLE `log_kegiatan`  (
+  `id_log` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `log_kegiatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  PRIMARY KEY (`id_log`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of log_kegiatan
+-- ----------------------------
+INSERT INTO `log_kegiatan` VALUES (1, '1', '2021-06-25 09:08:48', 'Melakukan Login');
 
 -- ----------------------------
 -- Table structure for ms_blok
@@ -24,7 +41,7 @@ DROP TABLE IF EXISTS `ms_blok`;
 CREATE TABLE `ms_blok`  (
   `id_blok` int(5) NOT NULL AUTO_INCREMENT,
   `nama_blok` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -52,7 +69,7 @@ CREATE TABLE `ms_no_rumah`  (
   `id_no_rumah` int(5) NOT NULL AUTO_INCREMENT,
   `id_blok` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `no_rumah` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -85,7 +102,7 @@ CREATE TABLE `tbl_keluarga`  (
   `status_perkawinan` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `pekerjaan` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status_hubungan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -108,7 +125,7 @@ CREATE TABLE `tbl_pengurus`  (
   `id_pengurus` int(5) NOT NULL AUTO_INCREMENT,
   `id_warga` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `jabatan` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -127,7 +144,7 @@ CREATE TABLE `tbl_user`  (
   `id_warga` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `nama` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `role_user` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -159,7 +176,7 @@ CREATE TABLE `tbl_warga`  (
   `pekerjaan` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `foto` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -281,7 +298,7 @@ CREATE TABLE `tr_rumah`  (
   `id_warga` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status_menempati` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status_rumah` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_at` timestamp(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,

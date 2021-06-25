@@ -158,7 +158,7 @@ $db['default'] = array(
 
 	'password' => '',
 
-	'database' => 'db_sikf1f8',
+	'database' => 'db_sik_grandmutiara',
 
 	'dbdriver' => 'mysqli',
 

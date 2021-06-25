@@ -2,18 +2,18 @@
 
 	RewriteEngine On
 
-	RewriteBase /sik_grandmutiara
+	RewriteBase /
 
 	RewriteCond %{REQUEST_FILENAME} !-f
 
 	RewriteCond %{REQUEST_FILENAME} !-d
 
-	RewriteRule ^(.*)$ /sik_grandmutiara/index.php/$1 [L]
+	RewriteRule ^(.*)$ /index.php/$1 [L]
 
 </IfModule>
 
 <IfModule !mod_rewrite.c>
 
-	ErrorDocument 404 /sik_grandmutiara/index.php
+	ErrorDocument 404 /index.php
 
 </IfModule>
