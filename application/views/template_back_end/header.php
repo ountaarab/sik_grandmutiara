@@ -27,6 +27,10 @@
   <?php
   }
   ?>
+  <script>
+    let base_url = '<?= base_url() ?>'
+    let INI_DIA = '<?= $this->uri->segment(1) ?>';
+  </script>
   <!-- ===== SWAL JS ===== -->
   <script src="<?= base_url() ?>assets/js/sweetalert.min.js"></script>
   <style type="text/css">

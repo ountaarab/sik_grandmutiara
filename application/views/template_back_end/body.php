@@ -38,19 +38,19 @@
 
             <div class="container-fluid">
 
-            <?php echo $_content; ?>            
+                <?php echo $_content; ?>
 
-            <?= "Logged In As : ".$_SESSION['jabatan'] ?>
+                <?= "Logged In As : " . $_SESSION['jabatan'] ?>
 
-            <br>
+                <br>
 
-            <br>
+                <br>
 
             </div>
 
             <!-- /.container-fluid -->
 
-        <?php echo $_footer; ?>
+            <?php echo $_footer; ?>
 
         </div>
 
@@ -105,95 +105,93 @@
 
     <!-- end - This is for export functionality only -->
     <script>
+        $(function() {
 
-    $(function() {
-
-        $('#myTable').DataTable();
-
+            $('#myTable').DataTable();
 
 
-        var table = $('#example').DataTable({
 
-            "columnDefs": [{
+            var table = $('#example').DataTable({
 
-                "visible": false,
+                "columnDefs": [{
 
-                "targets": 2
+                    "visible": false,
 
-            }],
+                    "targets": 2
 
-            "order": [
+                }],
 
-                [2, 'asc']
+                "order": [
 
-            ],
+                    [2, 'asc']
 
-            "displayLength": 25,
+                ],
 
-            "drawCallback": function(settings) {
+                "displayLength": 25,
 
-                var api = this.api();
+                "drawCallback": function(settings) {
 
-                var rows = api.rows({
+                    var api = this.api();
 
-                    page: 'current'
+                    var rows = api.rows({
 
-                }).nodes();
+                        page: 'current'
 
-                var last = null;
+                    }).nodes();
 
-                api.column(2, {
+                    var last = null;
 
-                    page: 'current'
+                    api.column(2, {
 
-                }).data().each(function(group, i) {
+                        page: 'current'
 
-                    if (last !== group) {
+                    }).data().each(function(group, i) {
 
-                        $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                        if (last !== group) {
 
-                        last = group;
+                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
 
-                    }
+                            last = group;
 
-                });
+                        }
 
-            }
+                    });
+
+                }
+
+            });
+
+            // Order by the grouping
+
+            $('#example tbody').on('click', 'tr.group', function() {
+
+                var currentOrder = table.order()[0];
+
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+
+                    table.order([2, 'desc']).draw();
+
+                } else {
+
+                    table.order([2, 'asc']).draw();
+
+                }
+
+            });
 
         });
 
-        // Order by the grouping
+        $('#example23').DataTable({
 
-        $('#example tbody').on('click', 'tr.group', function() {
+            dom: 'Bfrtip',
 
-            var currentOrder = table.order()[0];
+            buttons: [
 
-            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                'copy', 'csv', 'excel', 'pdf', 'print'
 
-                table.order([2, 'desc']).draw();
-
-            } else {
-
-                table.order([2, 'asc']).draw();
-
-            }
+            ]
 
         });
-
-    });
-
-    $('#example23').DataTable({
-
-        dom: 'Bfrtip',
-
-        buttons: [
-
-            'copy', 'csv', 'excel', 'pdf', 'print'
-
-        ]
-
-    });
-
     </script>
 
     <!--Style Switcher -->
@@ -202,69 +200,67 @@
 
 
 
-<!-- Validasi Only Number -->
+    <!-- Validasi Only Number -->
 
-<script type="application/javascript">
+    <script type="application/javascript">
+        function isNumberKey(evt)
 
-      function isNumberKey(evt)
+        {
 
-      {
+            var charCode = (evt.which) ? evt.which : event.keyCode
 
-         var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
 
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-
-            return false;
-
-
-
-         return true;
-
-      }
+                return false;
 
 
 
-      $('#pekerjaan').keyup(function(){
+            return true;
 
-            this.value = this.value.toUpperCase();
-
-      });
+        }
 
 
 
-      $('#nama_lengkap').keyup(function(){
+        //   $('#pekerjaan').keyup(function(){
 
-            this.value = this.value.toUpperCase();
+        //         this.value = this.value.toUpperCase();
 
-      });
-
-
-
-      $('#tempat_lahir').keyup(function(){
-
-            this.value = this.value.toUpperCase();
-
-      });
+        //   });
 
 
 
-      $('#email').keyup(function(){
+        //   $('#nama_lengkap').keyup(function(){
 
-            this.value = this.value.toUpperCase();
+        //         this.value = this.value.toUpperCase();
 
-      });
+        //   });
 
 
 
-      $('#gol_darah').keyup(function(){
+        //   $('#tempat_lahir').keyup(function(){
 
-            this.value = this.value.toUpperCase();
+        //         this.value = this.value.toUpperCase();
 
-      });
+        //   });
 
-</script>
 
-<!-- PLUGIN WYSI -->
+
+        //   $('#email').keyup(function(){
+
+        //         this.value = this.value.toUpperCase();
+
+        //   });
+
+
+
+        //   $('#gol_darah').keyup(function(){
+
+        //         this.value = this.value.toUpperCase();
+
+        //   });
+    </script>
+
+    <!-- PLUGIN WYSI -->
 
     <script src="<?php echo base_url() ?>assets/plugins/components/html5-editor/wysihtml5-0.3.0.js"></script>
 
@@ -273,98 +269,94 @@
     <script src="<?php echo base_url() ?>assets/plugins/components/dropzone-master/dist/dropzone.js"></script>
 
     <script>
+        $(function() {
 
-    $(function() {
+            $('.textarea_editor').wysihtml5();
 
-        $('.textarea_editor').wysihtml5();
-
-    });
-
+        });
     </script>
 
-<!-- PLUGIN WYSI END -->
+    <!-- PLUGIN WYSI END -->
 
-<!-- PLUGIN DROPIFY -->
+    <!-- PLUGIN DROPIFY -->
 
-    <?php 
+    <?php
 
-    if ($this->uri->segment(2) == 'form_add' || $this->uri->segment(2) == 'form_add_keluarga' || $this->uri->segment(2) == 'get_data_keluarga' || $this->uri->segment(2) == 'get_data') { ?>       
+    if ($this->uri->segment(2) == 'form_add' || $this->uri->segment(2) == 'form_add_keluarga' || $this->uri->segment(2) == 'get_data_keluarga' || $this->uri->segment(2) == 'get_data') { ?>
 
-    <!-- jQuery file upload -->
+        <!-- jQuery file upload -->
 
-    <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
+        <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
 
-    <script>
+        <script>
+            $(function() {
 
-    $(function() {
+                // Basic
 
-        // Basic
+                $('.dropify').dropify();
 
-        $('.dropify').dropify();
+                // Translated
 
-        // Translated
+                $('.dropify-fr').dropify({
 
-        $('.dropify-fr').dropify({
+                    messages: {
 
-            messages: {
+                        default: 'Glissez-déposez un fichier ici ou cliquez',
 
-                default: 'Glissez-déposez un fichier ici ou cliquez',
+                        replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
 
-                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                        remove: 'Supprimer',
 
-                remove: 'Supprimer',
+                        error: 'Désolé, le fichier trop volumineux'
 
-                error: 'Désolé, le fichier trop volumineux'
+                    }
 
-            }
+                });
 
-        });
+                // Used events
 
-        // Used events
+                var drEvent = $('#input-file-events').dropify();
 
-        var drEvent = $('#input-file-events').dropify();
+                drEvent.on('dropify.beforeClear', function(event, element) {
 
-        drEvent.on('dropify.beforeClear', function(event, element) {
+                    return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
 
-            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+                });
 
-        });
+                drEvent.on('dropify.afterClear', function(event, element) {
 
-        drEvent.on('dropify.afterClear', function(event, element) {
+                    alert('File deleted');
 
-            alert('File deleted');
+                });
 
-        });
+                drEvent.on('dropify.errors', function(event, element) {
 
-        drEvent.on('dropify.errors', function(event, element) {
+                    console.log('Has Errors');
 
-            console.log('Has Errors');
+                });
 
-        });
+                var drDestroy = $('#input-file-to-destroy').dropify();
 
-        var drDestroy = $('#input-file-to-destroy').dropify();
+                drDestroy = drDestroy.data('dropify')
 
-        drDestroy = drDestroy.data('dropify')
+                $('#toggleDropify').on('click', function(e) {
 
-        $('#toggleDropify').on('click', function(e) {
+                    e.preventDefault();
 
-            e.preventDefault();
+                    if (drDestroy.isDropified()) {
 
-            if (drDestroy.isDropified()) {
+                        drDestroy.destroy();
 
-                drDestroy.destroy();
+                    } else {
 
-            } else {
+                        drDestroy.init();
 
-                drDestroy.init();
+                    }
 
-            }
+                })
 
-        })
-
-    });
-
-    </script>
+            });
+        </script>
 
     <?php
 
@@ -372,20 +364,20 @@
 
     ?>
 
-<!-- PLUGIN DROPIFY END -->
+    <!-- PLUGIN DROPIFY END -->
 
-    <?php 
+    <?php
     if ($this->uri->segment(1) == 'Akun') { ?>
-    <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-2.2.3.min.js'?>"></script>
-    <script>
-        var g=jQuery.noConflict();
-        g('#password, #repassword').on('keyup', function () {
-          if (g('#password').val() == g('#repassword').val()) {
-            g('#message').html('Matching').css('color', 'green');
-          } else 
-            g('#message').html('Not Matching').css('color', 'red');
-        });
-    </script>
+        <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery-2.2.3.min.js' ?>"></script>
+        <script>
+            var g = jQuery.noConflict();
+            g('#password, #repassword').on('keyup', function() {
+                if (g('#password').val() == g('#repassword').val()) {
+                    g('#message').html('Matching').css('color', 'green');
+                } else
+                    g('#message').html('Not Matching').css('color', 'red');
+            });
+        </script>
     <?php
     }
     ?>
@@ -395,4 +387,3 @@
 
 
 </html>
-

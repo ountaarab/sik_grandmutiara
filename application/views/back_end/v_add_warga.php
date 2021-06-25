@@ -1,74 +1,72 @@
 <?php echo $this->session->flashdata('msg'); ?>
+<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/components/dropify/dist/css/dropify.min.css">
+<div class="row">
 
-            
+    <!-- Left sidebar -->
 
-                <div class="row">
+    <div class="col-md-12">
 
-                    <!-- Left sidebar -->
+        <div class="white-box">
 
-                    <div class="col-md-12">
+            <button type="button" class="close" onclick="batal()">×</button>
 
-                        <div class="white-box">
+            <div class="row">
 
-                                <a href="<?php echo base_url() ?>Warga"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
+                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/add" method="post" class="form-horizontal row-fluid" autocomplete="off">
 
-                            <div class="row">
+                    <div class="col-md-4 col-sm-6">
 
-                                    <form enctype="multipart/form-data" action="<?php echo base_url() ?>Warga/add" method="post" class="form-horizontal row-fluid">
+                        <h4 class="text-center">Data Warga </h4>
 
-                                        <div class="col-md-4 col-sm-6">
+                        <div class="white-box text-center">
 
-                                            <h4 class="text-center">Data Warga </h4>
+                            <center>
 
-                                            <div class="white-box text-center">
+                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
 
-                                                <center>
+                                <h5>Foto</h5>
 
-                                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/> 
+                            </center>
 
-                                                <h5>Foto</h5>
-
-                                                </center>
-
-                                            </div>
+                        </div>
 
 
 
-                                                    <table class="table table-hover">
+                        <table class="table table-hover">
 
-                                                        <tbody>
+                            <tbody>
 
-                                                            <tr>
+                                <tr>
 
-                                                                <td>Nama Lengkap</td>
+                                    <td>Nama Lengkap</td>
 
-                                                                <th>
+                                    <th>
 
-                                                                    <input type="text" value="<?php echo isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : '' ?>" id="nama_lengkap" required name="nama_lengkap" placeholder="Nama Lengkap..." class="form-control">
+                                        <input type="text" value="<?php echo isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : '' ?>" id="nama_lengkap" required name="nama_lengkap" placeholder="Nama Lengkap..." class="form-control">
 
-                                                                </th>
+                                    </th>
 
-                                                            </tr>
+                                </tr>
 
-                                                            <tr>
+                                <tr>
 
-                                                                <td>Status Menempati</td>
+                                    <td>Status Menempati</td>
 
-                                                                <th>
+                                    <th>
 
-                                                                    <select class="form-control" name="status_menempati">
+                                        <select class="form-control" name="status_menempati">
 
-                                                                        <option value="HAK MILIK">HAK MILIK</option>
+                                            <option value="HAK MILIK">HAK MILIK</option>
 
-                                                                        <option value="KONTRAK">KONTRAK</option>
+                                            <option value="KONTRAK">KONTRAK</option>
 
-                                                                    </select>
+                                        </select>
 
-                                                                </th>
+                                    </th>
 
-                                                            </tr>
+                                </tr>
 
-                                                            <!-- <tr>
+                                <!-- <tr>
 
                                                                 <td>Status Rumah</td>
 
@@ -86,295 +84,348 @@
 
                                                             </tr> -->
 
-                                                            <tr>
+                                <tr>
 
-                                                                <td>Blok</td>
+                                    <td>Blok</td>
 
-                                                                <th>
+                                    <th>
 
-                                                                    <select class="form-control" name="id_blok">
+                                        <select class="form-control" name="id_blok">
 
-                                                                    <?php
+                                            <?php
 
-                                                                    foreach ($data_blok->result() as $row) : ?>
+                                            foreach ($data_blok->result() as $row) : ?>
 
-                                                                        <option value="<?= $row->id_blok ?>"><?= $row->nama_blok ?></option>                
+                                                <option value="<?= $row->id_blok ?>"><?= $row->nama_blok ?></option>
 
-                                                                    <?php
+                                            <?php
 
-                                                                    endforeach;
+                                            endforeach;
 
-                                                                    ?>
+                                            ?>
 
-                                                                    </select>    
+                                        </select>
 
-                                                                </th>
+                                    </th>
 
-                                                            </tr>
+                                </tr>
 
-                                                            <tr>
+                                <tr>
 
-                                                                <td>No Rumah</td>
+                                    <td>No Rumah</td>
 
-                                                                <th>
+                                    <th>
 
-                                                                    <select class="form-control" required name="no_rumah">
+                                        <select class="form-control" required name="no_rumah">
 
-                                                                        <option value="">-PILIH-</option>
+                                            <option value="">-PILIH-</option>
 
-                                                                        <option value="1">1</option>
+                                            <option value="1">1</option>
 
-                                                                        <option value="2">2</option>
+                                            <option value="2">2</option>
 
-                                                                        <option value="3">3</option>
+                                            <option value="3">3</option>
 
-                                                                        <option value="4">4</option>
+                                            <option value="4">4</option>
 
-                                                                        <option value="5">5</option>
+                                            <option value="5">5</option>
 
-                                                                        <option value="6">6</option>
+                                            <option value="6">6</option>
 
-                                                                        <option value="7">7</option>
+                                            <option value="7">7</option>
 
-                                                                        <option value="8">8</option>
+                                            <option value="8">8</option>
 
-                                                                        <option value="9">9</option>
+                                            <option value="9">9</option>
 
-                                                                        <option value="10">10</option>
+                                            <option value="10">10</option>
 
-                                                                        <option value="11">11</option>
+                                            <option value="11">11</option>
 
-                                                                        <option value="12">12</option>
+                                            <option value="12">12</option>
 
-                                                                        <option value="12A">12A</option>
+                                            <option value="12A">12A</option>
 
-                                                                        <option value="13">13</option>
+                                            <option value="13">13</option>
 
-                                                                        <option value="14">14</option>
+                                            <option value="14">14</option>
 
-                                                                        <option value="15">15</option>
+                                            <option value="15">15</option>
 
-                                                                        <option value="16">16</option>
+                                            <option value="16">16</option>
 
-                                                                        <option value="17">17</option>
+                                            <option value="17">17</option>
 
-                                                                        <option value="18">18</option>
+                                            <option value="18">18</option>
 
-                                                                        <option value="19">19</option>
+                                            <option value="19">19</option>
 
-                                                                        <option value="20">20</option>
+                                            <option value="20">20</option>
 
-                                                                        <option value="21">21</option>
+                                            <option value="21">21</option>
 
-                                                                        <option value="22">22</option>
+                                            <option value="22">22</option>
 
-                                                                        <option value="23">23</option>
+                                            <option value="23">23</option>
 
-                                                                        <option value="24">24</option>
+                                            <option value="24">24</option>
 
-                                                                        <option value="25">25</option>
+                                            <option value="25">25</option>
 
-                                                                        <option value="26">26</option>
+                                            <option value="26">26</option>
 
-                                                                    </select> 
+                                        </select>
 
-                                                                </th>
+                                    </th>
 
-                                                            </tr>
+                                </tr>
 
-                                                        </tbody>
+                            </tbody>
 
-                                                    </table>
-
-                                        </div>
-
-                                        <div class="col-md-8 col-sm-6">
-
-                                                    <table class="table table-hover">
-
-                                                        <tbody>
-
-                                                            <tr>
-
-                                                                <td>NIK</td>
-
-                                                                <th>
-
-                                            <input type="number" maxlength="16"value="<?php echo isset($_SESSION['nik']) ? $_SESSION['nik'] : '' ?>" required placeholder="NIK..." onkeypress='return isNumberKey(event)' name="nik" class="form-control" >
-
-                                                                </th>
-
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td>Tempat Lahir</td>
-
-                                                                <th> 
-
-                                            <input type="text" maxlength="20" id="tempat_lahir" value="<?php echo isset($_SESSION['tempat_lahir']) ? $_SESSION['tempat_lahir'] : '' ?>" placeholder="Tempat Lahir..." name="tempat_lahir" class="form-control" >
-
-                                                                </th>
-
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td>Tanggal Lahir</td>
-
-                                                                <th> 
-
-                                            <input type="date"  name="tanggal_lahir" value="<?php echo isset($_SESSION['tanggal_lahir']) ? $_SESSION['tanggal_lahir'] : '' ?>" class="form-control" >
-
-                                                                </th>
-
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td>Jenis Kelamin</td>
-
-                                                                <th>
-
-                                                                    <select class="form-control" name="jk">
-
-                                                                        <option value="L">LAKI-LAKI</option>
-
-                                                                        <option value="P">PEREMPUAN</option>
-
-                                                                    </select>    
-
-                                                                </th>
-
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td>Golongan Darah</td>
-
-                                                                <th>
-
-                                            <input type="text" maxlength="20" value="<?php echo isset($_SESSION['gol_darah']) ? $_SESSION['gol_darah'] : '' ?>" id="gol_darah" placeholder="Golongan Darah..." name="gol_darah" class="form-control" >    
-
-                                                                </th>
-
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td>Agama</td>
-
-                                                                <th>
-
-                                                                    <select class="form-control" name="agama">
-
-                                                                        <option value="ISLAM">ISLAM</option>
-
-                                                                        <option value="KRISTEN">KRISTEN</option>
-
-                                                                        <option value="PROTESTAN">PROTESTAN</option>
-
-                                                                        <option value="HINDU">HINDU</option>
-
-                                                                        <option value="BUDHA">BUDHA</option>
-
-                                                                    </select>  
-
-                                                                </th>
-
-                                                            </tr> 
-
-                                                            <tr>
-
-                                                                <td>Status Perkawinan</td>
-
-                                                                <th>
-
-                                                                    <select class="form-control" name="status_perkawinan">
-
-                                                                        <option value="BELUM KAWIN">BELUM KAWIN</option>
-
-                                                                        <option value="KAWIN">KAWIN</option>
-
-                                                                        <option value="CERAI HIDUP">CERAI HIDUP</option>
-
-                                                                        <option value="CERAI MATI">CERAI MATI</option>
-
-                                                                    </select> 
-
-                                                                </th>
-
-                                                            </tr> 
-
-                                                            <tr>
-
-                                                                <td>Pekerjaan</td>
-
-                                                                <th>
-
-                                                                    <input type="text" value="<?php echo isset($_SESSION['pekerjaan']) ? $_SESSION['pekerjaan'] : '' ?>" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan..." class="form-control">    
-
-                                                                </th>
-
-                                                            </tr>  
-
-                                                            <tr>
-
-                                                                <td>Kontak</td>
-
-                                                                <th>
-
-                                            <input type="number" maxlength="13" value="<?php echo isset($_SESSION['kontak']) ? $_SESSION['kontak'] : '' ?>" placeholder="No. Handphone..." onkeypress='return isNumberKey(event)' name="kontak" class="form-control" >
-
-                                                                </th>
-
-                                                            </tr>   
-
-                                                            <tr>
-
-                                                                <td>Email</td>
-
-                                                                <th>
-
-                                            <input type="text" placeholder="E-mail" id="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : '' ?>"  name="email" class="form-control" >
-
-                                                                </th>
-
-                                                            </tr>   
-
-                                                            <tr>
-
-                                                                <td>
-
-                                                                    <div class="form-group">
-
-                                                                        <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Simpan</button>
-
-                                                                    </div>
-
-                                                                </td>
-
-                                                                <th></th>
-
-                                                            </tr>                                                  
-
-                                                        </tbody>
-
-                                                    </table>
-
-                                        </div>
-
-                                    </form>
-
-                                </div>
-
-                        </div>
+                        </table>
 
                     </div>
 
-                </div>
+                    <div class="col-md-8 col-sm-6">
 
+                        <table class="table table-hover">
 
+                            <tbody>
 
+                                <tr>
 
+                                    <td>NIK</td>
 
+                                    <th>
+
+                                        <input type="number" maxlength="16" value="<?php echo isset($_SESSION['nik']) ? $_SESSION['nik'] : '' ?>" required placeholder="NIK..." onkeypress='return isNumberKey(event)' name="nik" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Tempat Lahir</td>
+
+                                    <th>
+
+                                        <input type="text" maxlength="20" id="tempat_lahir" value="<?php echo isset($_SESSION['tempat_lahir']) ? $_SESSION['tempat_lahir'] : '' ?>" placeholder="Tempat Lahir..." name="tempat_lahir" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Tanggal Lahir</td>
+
+                                    <th>
+
+                                        <input type="date" name="tanggal_lahir" value="<?php echo isset($_SESSION['tanggal_lahir']) ? $_SESSION['tanggal_lahir'] : '' ?>" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Jenis Kelamin</td>
+
+                                    <th>
+
+                                        <select class="form-control" name="jk">
+
+                                            <option value="L">LAKI-LAKI</option>
+
+                                            <option value="P">PEREMPUAN</option>
+
+                                        </select>
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Golongan Darah</td>
+
+                                    <th>
+
+                                        <input type="text" maxlength="20" value="<?php echo isset($_SESSION['gol_darah']) ? $_SESSION['gol_darah'] : '' ?>" id="gol_darah" placeholder="Golongan Darah..." name="gol_darah" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Agama</td>
+
+                                    <th>
+
+                                        <select class="form-control" name="agama">
+
+                                            <option value="ISLAM">ISLAM</option>
+
+                                            <option value="KRISTEN">KRISTEN</option>
+
+                                            <option value="PROTESTAN">PROTESTAN</option>
+
+                                            <option value="HINDU">HINDU</option>
+
+                                            <option value="BUDHA">BUDHA</option>
+
+                                        </select>
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Status Perkawinan</td>
+
+                                    <th>
+
+                                        <select class="form-control" name="status_perkawinan">
+
+                                            <option value="BELUM KAWIN">BELUM KAWIN</option>
+
+                                            <option value="KAWIN">KAWIN</option>
+
+                                            <option value="CERAI HIDUP">CERAI HIDUP</option>
+
+                                            <option value="CERAI MATI">CERAI MATI</option>
+
+                                        </select>
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Pekerjaan</td>
+
+                                    <th>
+
+                                        <input type="text" value="<?php echo isset($_SESSION['pekerjaan']) ? $_SESSION['pekerjaan'] : '' ?>" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan..." class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Kontak</td>
+
+                                    <th>
+
+                                        <input type="number" maxlength="13" value="<?php echo isset($_SESSION['kontak']) ? $_SESSION['kontak'] : '' ?>" placeholder="No. Handphone..." onkeypress='return isNumberKey(event)' name="kontak" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>Email</td>
+
+                                    <th>
+
+                                        <input type="text" placeholder="E-mail" id="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : '' ?>" name="email" class="form-control">
+
+                                    </th>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="form-group">
+
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Simpan</button>
+
+                                        </div>
+
+                                    </td>
+
+                                    <th></th>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
+
+<script>
+    $(function() {
+        $('.dropify').dropify();
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+
+    $('#form-ajax').submit(function(e) {
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: new FormData($(this)[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                data = JSON.parse(data);
+                swal(data.title, data.msg, data.tipe);
+                if (data.status) {
+                    batal();
+                }
+            },
+            error: function(data) {
+
+            }
+        });
+        e.preventDefault();
+    });
+</script>
