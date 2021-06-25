@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/components/dropify/dist/css/dropify.min.css">
+<script>
+    $(document).ready(function() {
+        $('.dropify').dropify();
+    });
+</script>
 <?php echo $this->session->flashdata('msg');
 foreach ($data_pribadi->result() as $row) {
     $id_blok = $row->id_blok;
@@ -23,9 +28,9 @@ foreach ($data_pribadi->result() as $row) {
 
 
 if ($foto == NULL) {
-    $gambar = NULL;
+    $gambar = '';
 } else {
-    $gambar = "data-default-file='" . base_url() . "assets/plugins/foto/" . $foto . "'";
+    $gambar = "data-default-file='assets/plugins/foto/" . $foto . "'";
 }
 
 ?>
@@ -35,12 +40,12 @@ if ($foto == NULL) {
         <div class="white-box">
             <button type="button" class="close" onclick="batal()">×</button>
             <div class="row">
-                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/edit" method="post" class="form-horizontal row-fluid" autocomplete="off">
+                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/add" method="post" class="form-horizontal row-fluid" autocomplete="off">
                     <div class="col-md-4 col-sm-6">
                         <h4 class="text-center">Edit Data </h4>
                         <div class="white-box text-center">
                             <center>
-                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" / <?= $gambar ?>>
+                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                                 <h5>Foto</h5>
                             </center>
                         </div>
@@ -383,38 +388,6 @@ if ($foto == NULL) {
 </div>
 <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
 <script>
-    $(function() {
-        $('.dropify').dropify();
-        $('.dropify-fr').dropify({
-            messages: {
-                default: 'Glissez-déposez un fichier ici ou cliquez',
-                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                remove: 'Supprimer',
-                error: 'Désolé, le fichier trop volumineux'
-            }
-        });
-        var drEvent = $('#input-file-events').dropify();
-        drEvent.on('dropify.beforeClear', function(event, element) {
-            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-        });
-        drEvent.on('dropify.afterClear', function(event, element) {
-            alert('File deleted');
-        });
-        drEvent.on('dropify.errors', function(event, element) {
-            console.log('Has Errors');
-        });
-        var drDestroy = $('#input-file-to-destroy').dropify();
-        drDestroy = drDestroy.data('dropify')
-        $('#toggleDropify').on('click', function(e) {
-            e.preventDefault();
-            if (drDestroy.isDropified()) {
-                drDestroy.destroy();
-            } else {
-                drDestroy.init();
-            }
-        })
-    });
-
     $('#form-ajax').submit(function(e) {
         $.ajax({
             type: 'POST',
