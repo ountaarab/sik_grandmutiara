@@ -8,15 +8,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	// EPIZY SETTING =======================
-	'hostname' => 'sql103.epizy.com',
-	'username' => 'epiz_28970334',
-	'password' => 'r78fGKoAV4Jj5rG',
-	'database' => 'epiz_28970334_sik_grandmutiara',
+	// 'hostname' => 'sql103.epizy.com',
+	// 'username' => 'epiz_28970334',
+	// 'password' => 'r78fGKoAV4Jj5rG',
+	// 'database' => 'epiz_28970334_sik_grandmutiara',
 	// LOCAL SETTING ========================
-	// 'hostname' => 'localhost',
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'db_sik_grandmutiara',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'db_sik_grandmutiara',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
