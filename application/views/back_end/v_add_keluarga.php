@@ -60,7 +60,7 @@
 
                                     <th>
 
-                                        <input type="number" value="<?php echo isset($_SESSION['nik']) ? $_SESSION['nik'] : '' ?>" id="nik" required name="nik" placeholder="NIK..." class="form-control">
+                                        <input type="number" value="<?php echo isset($_SESSION['nik']) ? $_SESSION['nik'] : '' ?>" id="nik" name="nik" placeholder="NIK..." class="form-control">
 
                                     </th>
 
