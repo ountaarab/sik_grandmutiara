@@ -28,7 +28,7 @@ Data Keluarga
                             $no = 1;
                             foreach ($data_keluarga->result() as $_keluarga) {
                                 if ($_keluarga->foto == "") {
-                                    $gambar = '<h4 class="text-warning">Tidak Ada Foto</h4>';
+                                    $gambar = '<h4 class="text-warning">Belum ada foto</h4>';
                                 } else {
                                     $gambar = "<img src='" . base_url() . "assets/plugins/foto/" . $_keluarga->foto . "' style='max-width:70%;max-height:70%;'>";
                                 }

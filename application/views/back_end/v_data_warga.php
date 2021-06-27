@@ -26,9 +26,9 @@
                             $no = 1;
                             foreach ($data_warga->result() as $_warga) {
                                 if ($_warga->foto == "") {
-                                    $gambar = '<h4 class="text-warning">Tidak Ada Foto</h4>';
+                                    $gambar = '<h4 class="text-warning">Belum ada foto</h4>';
                                 } else {
-                                    $gambar = "<img src='" . base_url() . "assets/plugins/foto/" . $_warga->foto . "' style='max-width:70%;max-height:70%;'>";
+                                    $gambar = "<img src='" . base_url() . "assets/plugins/foto/" . $_warga->foto . "' style='width:50%;height:auto'>";
                                 }
                         ?>
                                 <tr>

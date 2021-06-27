@@ -69,7 +69,7 @@ class Warga extends CI_Controller
     {
         if ($id_warga) :
             $data['id_warga'] = $id_warga;
-            $this->template->back_end('back_end/v_add_keluarga', $data);
+            $this->load->view('back_end/v_add_keluarga', $data);
         else :
             redirect('Warga');
         endif;
@@ -134,13 +134,20 @@ class Warga extends CI_Controller
                         'created_by' => $id_user
                     );
                     $this->DataHandle->insert('tbl_keluarga', $input_data);
-
-                    $this->session->set_flashdata('msg', '<script> swal("Insert Success!", "Keluarga atas nama ' . $nama_lengkap . ' berhasil disimpan", "success"); </script>');
-                    redirect('Warga/keluarga/' . en_crypt($id_warga));
+                    $message = "Warga atas nama " . $nama_lengkap . " berhasil disimpan";
+                    $result = [
+                        'status' => true,
+                        'msg' => $message,
+                        'title' => "Sukses",
+                        'tipe' => "success",
+                    ];
                 } else {
-                    $this->session->set_flashdata('msg', '<script> swal("Failed Upload!", "Gambar Bermasalah !!!!", "error"); </script>');
-
-                    redirect('Warga/keluarga/' . en_crypt($id_warga));
+                    $result = [
+                        'status' => false,
+                        'msg' => "Upload Gambar terjadi kesalahan, mohon cek ekstensi file pada gambar...",
+                        'title' => "Maaf..",
+                        'tipe' => "info",
+                    ];
                 }
             }
             // KONDISI GAMBAR KOSONG
@@ -162,13 +169,18 @@ class Warga extends CI_Controller
                     'created_by' => $id_user
                 );
                 $this->DataHandle->insert('tbl_keluarga', $input_data);
-
-                $this->session->set_flashdata('msg', '<script> swal("Insert Success!", "Keluarga atas nama ' . $nama_lengkap . ' berhasil disimpan", "success"); </script>');
-                redirect('Warga/keluarga/' . de_crypt($id_warga));
+                $message = "Warga atas nama " . $nama_lengkap . " berhasil disimpan";
+                $result = [
+                    'status' => true,
+                    'msg' => $message,
+                    'title' => "Sukses",
+                    'tipe' => "success",
+                ];
             }
         else :
             redirect('Warga');
         endif;
+        echo json_encode($result);
     }
 
 
@@ -374,7 +386,7 @@ class Warga extends CI_Controller
     public function get_data_keluarga($id_keluarga, $id_warga)
     {
         $data['data_keluarga'] = $this->DataHandle->getAllWhere('tbl_keluarga', '*', "status = '1' AND id_warga='" . $id_warga . "' AND id_keluarga='" . $id_keluarga . "'", "id_keluarga ASC");
-        $this->template->back_end('back_end/v_edit_keluarga', $data);
+        $this->load->view('back_end/v_edit_keluarga', $data);
     }
 
     public function edit()
@@ -491,16 +503,16 @@ class Warga extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $id_warga = $this->input->post('id_warga');
         $id_keluarga = $this->input->post('id_keluarga');
-        $nama_lengkap = $this->input->post('nama_lengkap');
+        $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
         $nik = $this->input->post('nik');
-        $tempat_lahir = $this->input->post('tempat_lahir');
+        $tempat_lahir = strtoupper($this->input->post('tempat_lahir'));
         $tanggal_lahir = $this->input->post('tanggal_lahir');
-        $jk = $this->input->post('jk');
-        $gol_darah = $this->input->post('gol_darah');
-        $agama = $this->input->post('agama');
-        $status_perkawinan = $this->input->post('status_perkawinan');
+        $jk = strtoupper($this->input->post('jk'));
+        $gol_darah = strtoupper($this->input->post('gol_darah'));
+        $agama = strtoupper($this->input->post('agama'));
         $status_hubungan = $this->input->post('status_hubungan');
-        $pekerjaan = $this->input->post('pekerjaan');
+        $status_perkawinan = strtoupper($this->input->post('status_perkawinan'));
+        $pekerjaan = strtoupper($this->input->post('pekerjaan'));
 
         if ($_FILES['userfile']['name'] != NULL) {
             $gambar_lama = $this->input->post('gambar_lama');
@@ -542,15 +554,20 @@ class Warga extends CI_Controller
                     'id_keluarga' => $id_keluarga
                 );
                 $this->DataHandle->edit('tbl_keluarga', $edit_data, $where);
-
-                // HAPUS GAMBAR LAMA   
-                $this->session->set_flashdata('msg', '<script> swal("Update Success!", "Data Berhasil Diperbaharui ...", "success"); </script>');
-                redirect('Warga/keluarga/' . en_crypt($id_warga));
+                $message = "Warga atas nama " . $nama_lengkap . " berhasil diperbaharui";
+                $result = [
+                    'status' => true,
+                    'msg' => $message,
+                    'title' => "Sukses",
+                    'tipe' => "success",
+                ];
             } else {
-                $this->session->set_flashdata('msg', '<script> swal("Failed Upload!", "Gambar Bermasalah !!!!", "error"); </script>');
-
-
-                redirect('Warga/keluarga/' . en_crypt($id_warga));
+                $result = [
+                    'status' => false,
+                    'msg' => "Upload Gambar terjadi kesalahan, mohon cek ekstensi file pada gambar...",
+                    'title' => "Maaf..",
+                    'tipe' => "info",
+                ];
             }
         }
         // KONDISI GAMBAR KOSONG
@@ -573,10 +590,15 @@ class Warga extends CI_Controller
                 'id_keluarga' => $id_keluarga
             );
             $this->DataHandle->edit('tbl_keluarga', $edit_data, $where);
-
-            $this->session->set_flashdata('msg', '<script> swal("Update Success!", "Data Berhasil Diperbaharui ...", "success"); </script>');
-            redirect('Warga/keluarga/' . en_crypt($id_warga));
+            $message = "Warga atas nama " . $nama_lengkap . " berhasil disimpan";
+            $result = [
+                'status' => true,
+                'msg' => $message,
+                'title' => "Sukses",
+                'tipe' => "success",
+            ];
         }
+        echo json_encode($result);
     }
 
     private function set_upload_options()

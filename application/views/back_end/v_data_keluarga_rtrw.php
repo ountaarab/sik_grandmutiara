@@ -1,10 +1,10 @@
-            <a href="<?php echo base_url() ?>Warga/Data_warga" >Data Warga</a> / Data Keluarga
+            <a href="<?php echo base_url() ?>Warga/Data_warga">Data Warga</a> / Data Keluarga
 
             <hr>
 
-                <?php echo $this->session->flashdata('msg'); ?>
+            <?php echo $this->session->flashdata('msg'); ?>
 
-                <div class="row">
+            <div class="row">
 
 
 
@@ -12,43 +12,31 @@
 
                 // DATA PEMILIK ================================================
 
-                    foreach ($data_pribadi->result() as $_warga) { 
+                foreach ($data_pribadi->result() as $_warga) {
 
                     if ($_warga->jk == 'L') {
 
-                        $jk = 'Laki-laki';                        
-
-                    }
-
-                    else{
+                        $jk = 'Laki-laki';
+                    } else {
 
                         $jk = 'Perempuan';
-
                     }
 
                     if ($_warga->foto == "") {
 
                         if ($_warga->jk == 'L') {
 
-                            $gambar = base_url()."assets/plugins/foto/boy.png";
+                            $gambar = base_url() . "assets/plugins/foto/boy.png";
+                        } else {
 
+                            $gambar = base_url() . "assets/plugins/foto/girl.png";
                         }
+                    } else {
 
-                        else{
-
-                            $gambar = base_url()."assets/plugins/foto/girl.png";
-
-                        }
-
+                        $gambar = base_url() . "assets/plugins/foto/" . $_warga->foto;
                     }
 
-                    else{
-
-                        $gambar = base_url()."assets/plugins/foto/".$_warga->foto;                        
-
-                    }
-
-                    ?>
+                ?>
 
 
 
@@ -56,11 +44,11 @@
 
                     <div class="col-sm-12">
 
-                            <div class="panel panel-success block6">
+                        <div class="panel panel-success block6">
 
-                            <div class="panel-heading text-center"  data-perform="panel-collapse">Data Pemilik
+                            <div class="panel-heading text-center" data-perform="panel-collapse">Data Pemilik
 
-                                <div class="pull-right"><a href="#"><i class="fa fa-minus"></i></a>  </div>
+                                <div class="pull-right"><a href="#"><i class="fa fa-minus"></i></a> </div>
 
                             </div>
 
@@ -72,7 +60,7 @@
 
                                         <div class="col-md-4 col-sm-6">
 
-                                            <h4 class="text-center">BLOK <?= $_warga->nama_blok."-NO. ".$_warga->no_rumah; ?></h4>
+                                            <h4 class="text-center">BLOK <?= $_warga->nama_blok . "-NO. " . $_warga->no_rumah; ?></h4>
 
                                             <div class="white-box text-center">
 
@@ -90,93 +78,93 @@
 
                                         <div class="col-md-8 col-sm-6">
 
-                                                    <table class="table table-hover">
+                                            <table class="table table-hover">
 
-                                                        <tbody>
+                                                <tbody>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Status Menempati</td>
+                                                        <td>Status Menempati</td>
 
-                                                                <th><?= $_warga->status_menempati ?></th>
+                                                        <th><?= $_warga->status_menempati ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Status Rumah</td>
+                                                        <td>Status Rumah</td>
 
-                                                                <th><?= $_warga->status_rumah ?></th>
+                                                        <th><?= $_warga->status_rumah ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>NIK</td>
+                                                        <td>NIK</td>
 
-                                                                <th><?= $_warga->nik ?></th>
+                                                        <th><?= $_warga->nik ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>TTL</td>
+                                                        <td>TTL</td>
 
-                                                                <th><?= $_warga->tempat_lahir ?>, <?= date('d M Y', strtotime($_warga->tanggal_lahir)) ?></th>
+                                                        <th><?= $_warga->tempat_lahir ?>, <?= date('d M Y', strtotime($_warga->tanggal_lahir)) ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Jenis Kelamin</td>
+                                                        <td>Jenis Kelamin</td>
 
-                                                                <th><?= $jk ?></th>
+                                                        <th><?= $jk ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Agama</td>
+                                                        <td>Agama</td>
 
-                                                                <th><?= $_warga->agama ?></th>
+                                                        <th><?= $_warga->agama ?></th>
 
-                                                            </tr> 
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Status Perkawinan</td>
+                                                        <td>Status Perkawinan</td>
 
-                                                                <th><?= $_warga->status_perkawinan ?></th>
+                                                        <th><?= $_warga->status_perkawinan ?></th>
 
-                                                            </tr> 
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Pekerjaan</td>
+                                                        <td>Pekerjaan</td>
 
-                                                                <th><?= $_warga->pekerjaan ?></th>
+                                                        <th><?= $_warga->pekerjaan ?></th>
 
-                                                            </tr>  
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Kontak</td>
+                                                        <td>Kontak</td>
 
-                                                                <th><?= $_warga->kontak ?></th>
+                                                        <th><?= $_warga->kontak ?></th>
 
-                                                            </tr>   
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Email</td>
+                                                        <td>Email</td>
 
-                                                                <th style="font-size: 14px;"><?= strtolower($_warga->email)  ?></th>
+                                                        <th style="font-size: 14px;"><?= strtolower($_warga->email)  ?></th>
 
-                                                            </tr>                                                  
+                                                    </tr>
 
-                                                        </tbody>
+                                                </tbody>
 
-                                                    </table>
+                                            </table>
 
                                         </div>
 
@@ -184,21 +172,21 @@
 
                                 </div>
 
-                                </div>
+                            </div>
 
                         </div>
 
-                </div>
+                    </div>
 
 
 
-                            <!-- /.modal-content -->
+                    <!-- /.modal-content -->
 
 
 
-                <?php 
+                <?php
 
-                // DATA PEMILIK END ================================================
+                    // DATA PEMILIK END ================================================
 
                 }
 
@@ -206,39 +194,39 @@
 
 
 
-                    <div class="col-sm-12">
+                <div class="col-sm-12">
 
-                        <div class="white-box">
+                    <div class="white-box">
 
-                            <!-- <p class="text-muted m-b-30">Master Data Sekolah</p> -->
+                        <!-- <p class="text-muted m-b-30">Master Data Sekolah</p> -->
 
-                            <h3 class="box-title m-b-0">Data Keluarga</h3>
+                        <h3 class="box-title m-b-0">Data Keluarga</h3>
 
-                            <br>
+                        <br>
 
-                            <!-- <p style="text-align:right"><a href="<?php echo base_url() ?>Warga/form_add_keluarga/<?= $id_warga ?>"><button class="btn btn-success waves-effect waves-light"><i class="fa fa-plus m-l-5"></i> Keluarga</button></a></p> -->
+                        <!-- <p style="text-align:right"><a href="<?php echo base_url() ?>Warga/form_add_keluarga/<?= $id_warga ?>"><button class="btn btn-success waves-effect waves-light"><i class="fa fa-plus m-l-5"></i> Keluarga</button></a></p> -->
 
-                            <div class="table-responsive">
+                        <div class="table-responsive">
 
-                                <table id="myTable" class="table table-striped display">
+                            <table id="myTable" class="table table-striped display">
 
-                                    <thead>
+                                <thead>
 
-                                        <tr>
+                                    <tr>
 
-                                            <th class="text-center"></th>
+                                        <th class="text-center"></th>
 
-                                            <th class="text-center">Foto</th>
+                                        <th class="text-center">Foto</th>
 
-                                            <th class="text-center">Nama</th>
+                                        <th class="text-center">Nama</th>
 
-                                            <th class="text-center">Hubungan</th>
+                                        <th class="text-center">Hubungan</th>
 
-                                        </tr>
+                                    </tr>
 
-                                    </thead>
+                                </thead>
 
-                                    <tbody>
+                                <tbody>
 
                                     <?php
 
@@ -246,29 +234,23 @@
 
                                         # code...
 
-                                    }
-
-                                    else{
+                                    } else {
 
 
 
-                                        $no=1;
+                                        $no = 1;
 
-                                        foreach ($data_keluarga->result() as $_keluarga) { 
+                                        foreach ($data_keluarga->result() as $_keluarga) {
 
                                             if ($_keluarga->foto == "") {
 
-                                                $gambar = '<h4 class="text-warning">Tidak Ada Foto</h4>';
+                                                $gambar = '<h4 class="text-warning">Belum ada foto</h4>';
+                                            } else {
 
+                                                $gambar = "<img src='" . base_url() . "assets/plugins/foto/" . $_keluarga->foto . "' style='max-width:70%;max-height:70%;'>";
                                             }
 
-                                            else{
-
-                                                $gambar = "<img src='".base_url()."assets/plugins/foto/".$_keluarga->foto."' style='max-width:70%;max-height:70%;'>";
-
-                                            }
-
-                                            ?>
+                                    ?>
 
                                             <tr>
 
@@ -284,11 +266,12 @@
 
                                                                 <li><a data-toggle="modal" data-target="#ModalDetail-<?= $no ?>"><i class="fa fa-search m-r-5"></i>Lihat</a></li>
 
-                                                              <!--   <li><a href="<?= base_url() ?>Warga/get_data_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
+                                                                <!--   <li><a href="<?= base_url() ?>Warga/get_data_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
 
                                                                 <li class="divider"></li>
 
-                                                                <li><a href="<?= base_url() ?>Warga/delete_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>" onclick="javascript: return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash-o m-r-5"></i>Hapus</a> --></li>
+                                                                <li><a href="<?= base_url() ?>Warga/delete_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>" onclick="javascript: return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash-o m-r-5"></i>Hapus</a> -->
+                                                                </li>
 
                                                             </ul>
 
@@ -306,21 +289,17 @@
 
                                             </tr>
 
-                                        <?php 
+                                    <?php
 
-                                         $no++;
-
+                                            $no++;
                                         }
-
                                     }
 
                                     ?>
 
-                                    </tbody>
+                                </tbody>
 
-                                </table>
-
-                            </div>
+                            </table>
 
                         </div>
 
@@ -328,13 +307,15 @@
 
                 </div>
 
+            </div>
+
 
 
 
 
             <?php
 
-            $no=1;
+            $no = 1;
 
             // LOOPING MODAL ================================================
 
@@ -342,49 +323,35 @@
 
                 # code...
 
-            }
+            } else {
 
-            else{
 
-                    
 
-                foreach ($data_keluarga->result() as $_keluarga) { 
+                foreach ($data_keluarga->result() as $_keluarga) {
 
                     if ($_keluarga->jk == 'L') {
 
-                        $jk = 'Laki-laki';                        
-
-                    }
-
-                    else{
+                        $jk = 'Laki-laki';
+                    } else {
 
                         $jk = 'Perempuan';
-
                     }
 
                     if ($_keluarga->foto == "") {
 
                         if ($_keluarga->jk == 'L') {
 
-                            $gambar = base_url()."assets/plugins/foto/boy.png";
+                            $gambar = base_url() . "assets/plugins/foto/boy.png";
+                        } else {
 
+                            $gambar = base_url() . "assets/plugins/foto/girl.png";
                         }
+                    } else {
 
-                        else{
-
-                            $gambar = base_url()."assets/plugins/foto/girl.png";
-
-                        }
-
+                        $gambar = base_url() . "assets/plugins/foto/" . $_keluarga->foto;
                     }
 
-                    else{
-
-                        $gambar = base_url()."assets/plugins/foto/".$_keluarga->foto;                        
-
-                    }
-
-                    ?>
+            ?>
 
 
 
@@ -400,7 +367,8 @@
 
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 
-                                    <h4 class="modal-title" id="myModalLabel">Detail Keluarga</h4> </div>
+                                    <h4 class="modal-title" id="myModalLabel">Detail Keluarga</h4>
+                                </div>
 
                                 <div class="modal-body">
 
@@ -424,77 +392,77 @@
 
                                         <div class="col-md-8 col-sm-6">
 
-                                                    <table class="table table-hover">
+                                            <table class="table table-hover">
 
-                                                        <tbody>
+                                                <tbody>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>NIK</td>
+                                                        <td>NIK</td>
 
-                                                                <th><?= $_keluarga->nik ?></th>
+                                                        <th><?= $_keluarga->nik ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>TTL</td>
+                                                        <td>TTL</td>
 
-                                                                <th><?= $_keluarga->tempat_lahir ?>, <?= date('d M Y', strtotime($_keluarga->tanggal_lahir)) ?></th>
+                                                        <th><?= $_keluarga->tempat_lahir ?>, <?= date('d M Y', strtotime($_keluarga->tanggal_lahir)) ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Hubungan Status</td>
+                                                        <td>Hubungan Status</td>
 
-                                                                <th><?= $_keluarga->status_hubungan ?></th>
+                                                        <th><?= $_keluarga->status_hubungan ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Jenis Kelamin</td>
+                                                        <td>Jenis Kelamin</td>
 
-                                                                <th><?= $jk ?></th>
+                                                        <th><?= $jk ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Golongan Darah</td>
+                                                        <td>Golongan Darah</td>
 
-                                                                <th><?= $_keluarga->gol_darah ?></th>
+                                                        <th><?= $_keluarga->gol_darah ?></th>
 
-                                                            </tr>
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Agama</td>
+                                                        <td>Agama</td>
 
-                                                                <th><?= $_keluarga->agama ?></th>
+                                                        <th><?= $_keluarga->agama ?></th>
 
-                                                            </tr> 
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Status Perkawinan</td>
+                                                        <td>Status Perkawinan</td>
 
-                                                                <th><?= $_keluarga->status_perkawinan ?></th>
+                                                        <th><?= $_keluarga->status_perkawinan ?></th>
 
-                                                            </tr> 
+                                                    </tr>
 
-                                                            <tr>
+                                                    <tr>
 
-                                                                <td>Pekerjaan</td>
+                                                        <td>Pekerjaan</td>
 
-                                                                <th><?= $_keluarga->pekerjaan ?></th>
+                                                        <th><?= $_keluarga->pekerjaan ?></th>
 
-                                                            </tr>                                                   
+                                                    </tr>
 
-                                                        </tbody>
+                                                </tbody>
 
-                                                    </table>
+                                            </table>
 
                                         </div>
 
@@ -516,15 +484,12 @@
 
 
 
-                <?php 
+            <?php
 
-                // LOOPING MODAL ================================================
+                    // LOOPING MODAL ================================================
 
-                 $no++;
-
+                    $no++;
                 }
-
             }
 
             ?>
-

@@ -1,7 +1,5 @@
 <?php echo $this->session->flashdata('msg'); ?>
-
-
-
+<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/components/dropify/dist/css/dropify.min.css">
 <div class="row">
 
     <!-- Left sidebar -->
@@ -10,15 +8,15 @@
 
         <div class="white-box">
 
-            <a href="<?php echo base_url() ?>Warga/keluarga/<?= $id_warga ?>"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
+            <button type="button" class="close" onclick="batal()">×</button>
 
             <div class="row">
 
-                <form enctype="multipart/form-data" action="<?php echo base_url() ?>Warga/add_keluarga" method="post" class="form-horizontal row-fluid" autocomplete="off">
+                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/add_keluarga" method="post" class="form-horizontal row-fluid" autocomplete="off">
 
                     <div class="col-md-4 col-sm-6">
 
-                        <h4 class="text-center">Data Keluarga </h4>
+                        <h4 class="text-center">Tambah Data Keluarga </h4>
 
                         <div class="white-box text-center">
 
@@ -237,3 +235,62 @@
     </div>
 
 </div>
+
+
+<script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
+
+<script>
+    $(function() {
+        $('.dropify').dropify();
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+
+    $('#form-ajax').submit(function(e) {
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: new FormData($(this)[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                data = JSON.parse(data);
+                swal(data.title, data.msg, data.tipe);
+                if (data.status) {
+                    batal();
+                }
+            },
+            error: function(data) {
+
+            }
+        });
+        e.preventDefault();
+    });
+</script>
