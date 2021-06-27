@@ -1,14 +1,16 @@
 Data Keluarga
 <hr>
 <?php echo $this->session->flashdata('msg'); ?>
-<div class="row">
+<div class="row" id="second-content">
+</div>
+<div class="row" id="primary-content">
 
     <div class="col-sm-12">
         <div class="white-box">
             <!-- <p class="text-muted m-b-30">Master Data Sekolah</p> -->
             <h3 class="box-title m-b-0">Data Keluarga</h3>
             <br>
-            <p style="text-align:right"><a href="<?php echo base_url() ?>Keluarga/form_add/<?= en_crypt($id_warga) ?>"><button class="btn btn-success waves-effect waves-light"><i class="fa fa-plus m-l-5"></i> Keluarga</button></a></p>
+            <p style="text-align:right"><a onclick="add_keluarga_pribadi('<?= en_crypt($id_warga) ?>')"><button class="btn btn-success waves-effect waves-light"><i class="fa fa-plus m-l-5"></i> Keluarga</button></a></p>
             <div class="table-responsive">
                 <table id="myTable" class="table table-striped display">
                     <thead>
@@ -40,7 +42,7 @@ Data Keluarga
                                                 <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default btn-outline dropdown-toggle waves-effect waves-light" type="button"> <i class="fa fa-gears m-r-5"></i> <span class="caret"></span></button>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li><a data-toggle="modal" data-target="#ModalDetail-<?= $no ?>"><i class="fa fa-search m-r-5"></i>Lihat</a></li>
-                                                    <li><a href="<?= base_url() ?>Keluarga/get_data_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
+                                                    <li><a onclick="edit_keluarga('<?= $_keluarga->id_keluarga; ?>','<?= $_keluarga->id_warga; ?>')"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
                                                     <li class="divider"></li>
                                                     <li><a onclick='javascript: swal({
                                                                       title: "Are You Sure?",
@@ -172,3 +174,24 @@ if ($data_keluarga == NULL) {
     }
 }
 ?>
+
+<script>
+    function add_keluarga_pribadi(id) {
+        $('#primary-content').hide();
+        $.get(base_url + INI_DIA + '/form_add/' + id, function(result) {
+            $('#second-content').html(result);
+        });
+    }
+
+    function batal() {
+        $('#primary-content').show();
+        $('#second-content').html('');
+    }
+
+    function edit_keluarga(id_k, id_w) {
+        $('#primary-content').hide();
+        $.get(base_url + INI_DIA + '/get_data_keluarga/' + id_k + '/' + id_w, function(result) {
+            $('#second-content').html(result);
+        });
+    }
+</script>

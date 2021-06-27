@@ -44,7 +44,7 @@ class Keluarga extends CI_Controller
     public function form_add($id_warga)
     {
         $data['id_warga'] = $id_warga;
-        $this->template->back_end('back_end/v_add_keluargapribadi', $data);
+        $this->load->view('back_end/v_add_keluargapribadi', $data);
     }
 
 
@@ -53,7 +53,7 @@ class Keluarga extends CI_Controller
     {
         $this->load->library('upload'); //pemanggilan library upload
         $id_user = $this->session->userdata('id_user');
-        $id_warga = $this->input->post('id_warga');
+        $id_warga = de_crypt($this->input->post('id_warga'));
         $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
         $nik = $this->input->post('nik');
         $tempat_lahir = strtoupper($this->input->post('tempat_lahir'));
@@ -105,7 +105,6 @@ class Keluarga extends CI_Controller
                     'created_by' => $id_user
                 );
                 $this->DataHandle->insert('tbl_keluarga', $input_data);
-                $this->session->set_flashdata('msg', '<script> swal("Insert Success!", "Keluarga atas nama ' . $nama_lengkap . ' berhasil disimpan", "success"); </script>');
 
                 // CATAT LOG
                 $input_data = array(
@@ -115,11 +114,20 @@ class Keluarga extends CI_Controller
                 );
                 $this->DataHandle->insert('log_kegiatan', $input_data);
 
-                redirect('Keluarga');
+                $message = "Keluarga atas nama " . $nama_lengkap . " berhasil disimpan";
+                $result = [
+                    'status' => true,
+                    'msg' => $message,
+                    'title' => "Sukses",
+                    'tipe' => "success",
+                ];
             } else {
-                $this->session->set_flashdata('msg', '<script> swal("Failed Upload!", "Gambar Bermasalah !!!!", "error"); </script>');
-
-                redirect('Keluarga');
+                $result = [
+                    'status' => false,
+                    'msg' => "Upload Gambar terjadi kesalahan, mohon cek ekstensi file pada gambar...",
+                    'title' => "Maaf..",
+                    'tipe' => "info",
+                ];
             }
         }
         // KONDISI GAMBAR KOSONG
@@ -142,8 +150,6 @@ class Keluarga extends CI_Controller
             );
             $this->DataHandle->insert('tbl_keluarga', $input_data);
 
-            $this->session->set_flashdata('msg', '<script> swal("Insert Success!", "Keluarga atas nama ' . $nama_lengkap . ' berhasil disimpan", "success"); </script>');
-
             // CATAT LOG
             $input_data = array(
                 'id_user' => $id_user,
@@ -151,8 +157,15 @@ class Keluarga extends CI_Controller
                 'log_kegiatan' => 'Menambah Keluarga atas nama ' . $nama_lengkap . ' tanpa foto'
             );
             $this->DataHandle->insert('log_kegiatan', $input_data);
-            redirect('Keluarga');
+            $message = "Keluarga atas nama " . $nama_lengkap . " berhasil disimpan";
+            $result = [
+                'status' => true,
+                'msg' => $message,
+                'title' => "Sukses",
+                'tipe' => "success",
+            ];
         }
+        echo json_encode($result);
     }
 
 
@@ -348,15 +361,16 @@ class Keluarga extends CI_Controller
 
     public function get_data($id_warga)
     {
+        $id_warga = de_crypt($id_warga);
         $data['data_blok'] = $this->DataHandle->getAllWhere($this->nama_tabel2, '*', "status = '1'", "nama_blok ASC");
         $data['data_pribadi'] = $this->DataHandle->other_query("SELECT tr_rumah.status_menempati, tr_rumah.status_rumah, tr_rumah.no_rumah, ms_blok.nama_blok,ms_blok.id_blok, tbl_warga.id_warga, tbl_warga.nik, tbl_warga.nama_lengkap, tbl_warga.tempat_lahir, tbl_warga.tanggal_lahir, tbl_warga.kontak, tbl_warga.email, tbl_warga.jk, tbl_warga.gol_darah, tbl_warga.agama, tbl_warga.status_perkawinan, tbl_warga.pekerjaan, tbl_warga.`status`, tbl_warga.foto FROM tr_rumah INNER JOIN ms_blok ON tr_rumah.id_blok = ms_blok.id_blok INNER JOIN tbl_warga ON tbl_warga.id_warga = tr_rumah.id_warga WHERE tr_rumah.status='1' AND tr_rumah.id_warga = '" . $id_warga . "' ORDER BY tr_rumah.id_warga DESC");
-        $this->template->back_end('back_end/v_edit_warga', $data);
+        $this->load->view('back_end/v_edit_warga', $data);
     }
 
     public function get_data_keluarga($id_keluarga, $id_warga)
     {
         $data['data_keluarga'] = $this->DataHandle->getAllWhere('tbl_keluarga', '*', "status = '1' AND id_warga='" . $id_warga . "' AND id_keluarga='" . $id_keluarga . "'", "id_keluarga ASC");
-        $this->template->back_end('back_end/v_edit_keluargapribadi', $data);
+        $this->load->view('back_end/v_edit_keluargapribadi', $data);
     }
 
     public function edit()
@@ -613,16 +627,16 @@ class Keluarga extends CI_Controller
         $id_user = $this->session->userdata('id_user');
         $id_warga = $this->input->post('id_warga');
         $id_keluarga = $this->input->post('id_keluarga');
-        $nama_lengkap = $this->input->post('nama_lengkap');
+        $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
         $nik = $this->input->post('nik');
-        $tempat_lahir = $this->input->post('tempat_lahir');
+        $tempat_lahir = strtoupper($this->input->post('tempat_lahir'));
         $tanggal_lahir = $this->input->post('tanggal_lahir');
-        $jk = $this->input->post('jk');
-        $gol_darah = $this->input->post('gol_darah');
-        $agama = $this->input->post('agama');
-        $status_perkawinan = $this->input->post('status_perkawinan');
+        $jk = strtoupper($this->input->post('jk'));
+        $gol_darah = strtoupper($this->input->post('gol_darah'));
+        $agama = strtoupper($this->input->post('agama'));
         $status_hubungan = $this->input->post('status_hubungan');
-        $pekerjaan = $this->input->post('pekerjaan');
+        $status_perkawinan = strtoupper($this->input->post('status_perkawinan'));
+        $pekerjaan = strtoupper($this->input->post('pekerjaan'));
 
         if ($_FILES['userfile']['name'] != NULL) {
             $gambar_lama = $this->input->post('gambar_lama');
@@ -672,14 +686,20 @@ class Keluarga extends CI_Controller
                     'log_kegiatan' => 'Merubah Data Keluarga atas nama ' . $nama_lengkap . ' dan merubah foto'
                 );
                 $this->DataHandle->insert('log_kegiatan', $input_data);
-
-                // HAPUS GAMBAR LAMA   
-                $this->session->set_flashdata('msg', '<script> swal("Update Success!", "Data Berhasil Perbaharui ...", "success"); </script>');
-                redirect('Keluarga');
+                $message = "Keluarga atas nama " . $nama_lengkap . " berhasil diperbaharui";
+                $result = [
+                    'status' => true,
+                    'msg' => $message,
+                    'title' => "Sukses",
+                    'tipe' => "success",
+                ];
             } else {
-                $this->session->set_flashdata('msg', '<script> swal("Failed Upload!", "Gambar Bermasalah !!!!", "error"); </script>');
-
-                redirect('Keluarga');
+                $result = [
+                    'status' => false,
+                    'msg' => "Upload Gambar terjadi kesalahan, mohon cek ekstensi file pada gambar...",
+                    'title' => "Maaf..",
+                    'tipe' => "info",
+                ];
             }
         }
         // KONDISI GAMBAR KOSONG
@@ -710,9 +730,15 @@ class Keluarga extends CI_Controller
             );
             $this->DataHandle->insert('log_kegiatan', $input_data);
 
-            $this->session->set_flashdata('msg', '<script> swal("Update Success!", "Data Berhasil Perbaharui ...", "success"); </script>');
-            redirect('Keluarga');
+            $message = "Keluarga atas nama " . $nama_lengkap . " berhasil diperbaharui";
+            $result = [
+                'status' => true,
+                'msg' => $message,
+                'title' => "Sukses",
+                'tipe' => "success",
+            ];
         }
+        echo json_encode($result);
     }
 
     private function set_upload_options()
