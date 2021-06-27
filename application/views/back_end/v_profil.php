@@ -1,9 +1,7 @@
 <?php echo $this->session->flashdata('msg'); ?>
-
-<div class="row">
-
-
-
+<div class="row" id="second-content">
+</div>
+<div class="row" id="primary-content">
     <?php
 
     // DATA PEMILIK ================================================
@@ -70,7 +68,7 @@
 
                                 </div>
 
-                                <p style="text-align:left"><a href="<?php echo base_url() ?>Profil/get_data"><button class="btn btn-info waves-effect waves-light"><i class="fa fa-pencil"></i> Edit Profil</button></a></p>
+                                <p style="text-align:left"><a onclick="get_profil()"><button class="btn btn-info waves-effect waves-light"><i class="fa fa-pencil"></i> Edit Profil</button></a></p>
 
                             </div>
 
@@ -191,3 +189,19 @@
     ?>
 
 </div>
+
+<script>
+    function get_profil() {
+        $('#primary-content').hide();
+        $.get(base_url + INI_DIA + '/get_data', function(result) {
+            $('#second-content').html(result);
+        });
+    }
+
+
+
+    function batal() {
+        $('#primary-content').show();
+        $('#second-content').html('');
+    }
+</script>
