@@ -33,8 +33,8 @@ class Warga extends CI_Controller
 
     public function get_datas()
     {
-        $column_order = ['status_menempati', 'status_rumah', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'kontak', 'email', 'jk', 'gol_darah', 'agama', 'status_perkawinan', 'pekerjaan', 'status', 'foto'];
-        $column_search = ['status_menempati', 'status_rumah', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'kontak', 'email', 'jk', 'gol_darah', 'agama', 'status_perkawinan', 'pekerjaan', 'status', 'foto'];
+        $column_order = array(null, 'status_menempati', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'status', 'foto');
+        $column_search = array('status_menempati', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'status', 'foto');
         $order = array('id_warga' => 'DESC');
         $kondisi = 'id_warga is not null';
         $list = $this->M_Datatable->get_datatables(
