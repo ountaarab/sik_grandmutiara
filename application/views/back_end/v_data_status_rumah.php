@@ -1,6 +1,6 @@
                 Data Status Rumah
 
-            <hr>
+                <hr>
 
                 <?php echo $this->session->flashdata('msg'); ?>
 
@@ -59,39 +59,33 @@
 
                                                 <tbody>
 
-                                                <?php
+                                                    <?php
 
-                                                if ($data_warga == NULL) {
+                                                    if ($data_warga == NULL) {
 
-                                                    # code...
+                                                        # code...
 
-                                                }
-
-                                                else{
+                                                    } else {
 
 
 
-                                                    $no=1;
+                                                        $no = 1;
 
-                                                    foreach ($data_warga->result() as $_warga) { 
+                                                        foreach ($data_warga->result() as $_warga) {
 
-                                                    if ($_warga->status_rumah == "TIDAK ADA") {
+                                                            if ($_warga->status_rumah == "TIDAK ADA") {
 
-                                                        $color = 'danger';
+                                                                $color = 'danger';
+                                                            } else {
 
-                                                    }
+                                                                $color = 'success';
+                                                            }
 
-                                                    else{
+                                                    ?>
 
-                                                        $color = 'success';
+                                                            <tr>
 
-                                                    }
-
-                                                        ?>
-
-                                                        <tr>
-
-            <!--                                                 <td>
+                                                                <!--                                                 <td>
 
                                                                 <center>
 
@@ -107,7 +101,7 @@
 
                                                                             <li><a href="<?= base_url() ?>Warga/get_data/<?= $_warga->id_warga; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
 
-                                                                            <li class="divider"></li>
+                                                                            
 
                                                                             <li><a href="<?= base_url() ?>Warga/delete/<?= $_warga->id_warga; ?>" onclick="javascript: return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash-o m-r-5"></i>Hapus</a></li>
 
@@ -119,35 +113,33 @@
 
                                                             </td> -->
 
-                                                            <td class="text-center"><?= $no; ?></td>
+                                                                <td class="text-center"><?= $no; ?></td>
 
-                                                            <td>
+                                                                <td>
 
-                                                                <b><?= $_warga->nama_lengkap; ?></b>
+                                                                    <b><?= $_warga->nama_lengkap; ?></b>
 
-                                                                <br>
+                                                                    <br>
 
-                                                                BLOK <?= $_warga->nama_blok."-NO. ".$_warga->no_rumah; ?>
+                                                                    BLOK <?= $_warga->nama_blok . "-NO. " . $_warga->no_rumah; ?>
 
-                                                                <br>
+                                                                    <br>
 
-                                                                <?= $_warga->status_menempati; ?>
+                                                                    <?= $_warga->status_menempati; ?>
 
-                                                            </td>
+                                                                </td>
 
-                                                            <td class="text-center"><strong><span class="text-<?= $color ?>"><?= $_warga->status_rumah; ?></span></strong></td>
+                                                                <td class="text-center"><strong><span class="text-<?= $color ?>"><?= $_warga->status_rumah; ?></span></strong></td>
 
-                                                        </tr>
+                                                            </tr>
 
-                                                    <?php 
+                                                    <?php
 
-                                                     $no++;
-
+                                                            $no++;
+                                                        }
                                                     }
 
-                                                }
-
-                                                ?>
+                                                    ?>
 
                                                 </tbody>
 
@@ -167,7 +159,8 @@
 
                                         <h3>Lets check profile</h3>
 
-                                        <h4>you can use it with the small code</h4> </div>
+                                        <h4>you can use it with the small code</h4>
+                                    </div>
 
                                     <div class="col-md-5 pull-right">
 
@@ -185,7 +178,8 @@
 
                                         <h3>Come on you have a lot message</h3>
 
-                                        <h4>you can use it with the small code</h4> </div>
+                                        <h4>you can use it with the small code</h4>
+                                    </div>
 
                                     <div class="col-md-5 pull-right">
 
@@ -203,7 +197,8 @@
 
                                         <h3>Just do Settings</h3>
 
-                                        <h4>you can use it with the small code</h4> </div>
+                                        <h4>you can use it with the small code</h4>
+                                    </div>
 
                                     <div class="col-md-5 pull-right">
 
@@ -221,7 +216,8 @@
 
                                         <h3>Tes Boy</h3>
 
-                                        <h4>Tes BoyTes BoyTes BoyTes Boy</h4> </div>
+                                        <h4>Tes BoyTes BoyTes BoyTes Boy</h4>
+                                    </div>
 
                                     <div class="col-md-5 pull-right">
 
@@ -240,4 +236,3 @@
                     </div>
 
                 </div>
-

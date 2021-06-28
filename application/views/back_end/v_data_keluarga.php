@@ -140,7 +140,7 @@
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li><a data-toggle="modal" data-target="#ModalDetail-<?= $no ?>"><i class="fa fa-search m-r-5"></i>Lihat</a></li>
                                                     <li><a onclick="edit_keluarga('<?= $_keluarga->id_keluarga; ?>', '<?= $_keluarga->id_warga; ?>')"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
-                                                    <li class="divider"></li>
+
                                                     <li><a onclick='javascript: swal({
                                                             title: "Are You Sure?",
                                                             text: "Konfirmasi untuk menghapus data terpilih",

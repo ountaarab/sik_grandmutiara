@@ -268,7 +268,7 @@
 
                                                                 <!--   <li><a href="<?= base_url() ?>Warga/get_data_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
 
-                                                                <li class="divider"></li>
+                                                                
 
                                                                 <li><a href="<?= base_url() ?>Warga/delete_keluarga/<?= $_keluarga->id_keluarga; ?>/<?= $_keluarga->id_warga; ?>" onclick="javascript: return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash-o m-r-5"></i>Hapus</a> -->
                                                                 </li>

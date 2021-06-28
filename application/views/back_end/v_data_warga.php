@@ -4,7 +4,6 @@
         <div id="second-content">
         </div>
         <div class="white-box" id="primary-content">
-            <!-- <p class="text-muted m-b-30">Master Data Sekolah</p> -->
             <h3 class="box-title m-b-0">Data Warga</h3>
             <br>
             <p style="text-align:right"><button class="btn btn-success waves-effect waves-light" onclick="form_add()"><i class="fa fa-plus m-l-5"></i> Warga</button></p>
@@ -40,7 +39,7 @@
                                                     <li><a data-toggle="modal" data-target="#ModalDetail-<?= $no ?>"><i class="fa fa-search m-r-5"></i>Lihat</a></li>
                                                     <li><a href="<?= base_url() ?>Warga/keluarga/<?= en_crypt($_warga->id_warga) ?>"><i class="fa fa-users m-r-5"></i>Anggota Keluarga</a></li>
                                                     <li><a href="#" onclick="form_edit('<?= en_crypt($_warga->id_warga) ?>')"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
-                                                    <li class="divider"></li>
+
                                                     <li><a onclick='javascript: swal({
                                                         title: "Are You Sure?",
                                                         text: "Konfirmasi untuk menghapus data terpilih",

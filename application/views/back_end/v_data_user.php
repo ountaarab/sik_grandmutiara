@@ -40,7 +40,7 @@
                                                             <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default btn-outline dropdown-toggle waves-effect waves-light" type="button"> <i class="fa fa-gears m-r-5"></i> <span class="caret"></span></button>
                                                             <ul role="menu" class="dropdown-menu">
                                                                 <li><a data-toggle="modal" data-target="#ModalEdit-<?= $_user->id_user; ?>"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
-                                                                <li class="divider"></li>
+                                                                
                                                                 <li><a onclick='javascript: swal({
                                                                   title: "Are You Sure?",
                                                                   text: "Konfirmasi untuk menghapus data terpilih",
