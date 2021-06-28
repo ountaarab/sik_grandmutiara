@@ -25,7 +25,7 @@ foreach ($data_pribadi->result() as $row) {
 if ($foto == NULL) {
     $gambar = '';
 } else {
-    $gambar = "data-default-file='assets/plugins/foto/" . $foto . "'";
+    $gambar = "assets/plugins/foto/" . $foto . "'";
 }
 
 ?>
@@ -387,10 +387,19 @@ if ($foto == NULL) {
 <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
 <script>
     $(function() {
-        $('#foto_atlet').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
-        $('.dropify').dropify({
-            defaultFile: "assets/plugins/foto/<?= $foto ?>",
-        });
+        <?php
+        if ($foto != null) :
+        ?>
+            $('#foto_atlet').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
+        <?php
+        else :
+        ?>
+            $('#foto_atlet').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
+
+        <?php
+        endif;
+        ?>
+        $('.dropify').dropify();
 
         $('.dropify-fr').dropify({
             messages: {
