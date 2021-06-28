@@ -266,4 +266,4 @@ $autoload['language'] = array();
 
 */
 
-$autoload['model'] = array('DataHandle');
+$autoload['model'] = array('DataHandle', 'M_Datatable');

@@ -1,9 +1,4 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/components/dropify/dist/css/dropify.min.css">
-<script>
-    $(document).ready(function() {
-        $('.dropify').dropify();
-    });
-</script>
 <?php echo $this->session->flashdata('msg');
 foreach ($data_pribadi->result() as $row) {
     $id_blok = $row->id_blok;
@@ -40,12 +35,15 @@ if ($foto == NULL) {
         <div class="white-box">
             <button type="button" class="close" onclick="batal()">×</button>
             <div class="row">
-                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/add" method="post" class="form-horizontal row-fluid" autocomplete="off">
+                <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/edit" method="post" class="form-horizontal row-fluid" autocomplete="off">
                     <div class="col-md-4 col-sm-6">
-                        <h4 class="text-center">Edit Data </h4>
+                        <h4 class="text-center">Edit Data Warga</h4>
                         <div class="white-box text-center">
                             <center>
-                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+
+                                <div class="form-group" id="foto_atlet">
+                                </div>
+                                <!-- <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"> -->
                                 <h5>Foto</h5>
                             </center>
                         </div>
@@ -388,6 +386,48 @@ if ($foto == NULL) {
 </div>
 <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
 <script>
+    $(function() {
+        $('#foto_atlet').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
+        $('.dropify').dropify({
+            defaultFile: "assets/plugins/foto/<?= $foto ?>",
+        });
+
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        // var drEvent = $('#input-file-events').dropify();
+        // drEvent.on('dropify.beforeClear', function(event, element) {
+        //     return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        // });
+        // drEvent.on('dropify.afterClear', function(event, element) {
+        //     alert('File deleted');
+        // });
+        // drEvent.on('dropify.errors', function(event, element) {
+        //     console.log('Has Errors');
+        // });
+        // var drDestroy = $('#input-file-to-destroy').dropify();
+        // drDestroy = drDestroy.data('dropify')
+        // $('#toggleDropify').on('click', function(e) {
+        //     e.preventDefault();
+        //     if (drDestroy.isDropified()) {
+        //         drDestroy.destroy();
+        //     } else {
+        //         drDestroy.init();
+        //     }
+        // })
+    });
+
+
+    function change_file() {
+        $('#change-upload').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
+        $('.dropify').dropify();
+
+    }
     $('#form-ajax').submit(function(e) {
         $.ajax({
             type: 'POST',
@@ -401,6 +441,7 @@ if ($foto == NULL) {
                 swal(data.title, data.msg, data.tipe);
                 if (data.status) {
                     batal();
+                    view();
                 }
             },
             error: function(data) {

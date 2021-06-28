@@ -31,6 +31,89 @@ class Warga extends CI_Controller
         $this->template->back_end('back_end/v_data_warga', $data);
     }
 
+    public function get_datas()
+    {
+        $column_order = ['status_menempati', 'status_rumah', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'kontak', 'email', 'jk', 'gol_darah', 'agama', 'status_perkawinan', 'pekerjaan', 'status', 'foto'];
+        $column_search = ['status_menempati', 'status_rumah', 'no_rumah', 'nama_blok', 'id_warga', 'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'kontak', 'email', 'jk', 'gol_darah', 'agama', 'status_perkawinan', 'pekerjaan', 'status', 'foto'];
+        $order = array('id_warga' => 'DESC');
+        $kondisi = 'id_warga is not null';
+        $list = $this->M_Datatable->get_datatables(
+            'v_all_warga',
+            $column_order,
+            $column_search,
+            $order,
+            '*',
+            $kondisi
+        );
+
+        $data = array();
+        $no = $_POST['start'];
+
+        foreach ($list as $row) {
+            $baris = array();
+            $no = $no + 1;
+
+            if ($row->foto == "") {
+                $gambar = '<h4 class="text-warning">Belum ada foto</h4>';
+            } else {
+                $gambar = "<img src='" . base_url() . "assets/plugins/foto/" . $row->foto . "' style='width:50%;height:auto'>";
+            }
+
+            $baris[] = '<center><div class="btn-group m-r-10">
+            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default btn-outline dropdown-toggle waves-effect waves-light" type="button"> <i class="fa fa-gears m-r-5"></i> <span class="caret"></span></button>
+            <ul role="menu" class="dropdown-menu">
+                <li><a data-toggle="modal" data-target="#ModalDetail-<?= $no ?>"><i class="fa fa-search m-r-5"></i>Lihat</a></li>
+                <li><a href="' . base_url() . 'Warga/keluarga/' . en_crypt($row->id_warga) . '"><i class="fa fa-users m-r-5"></i>Anggota Keluarga</a></li>
+                <li><a href="#" onclick="form_edit(\'' . en_crypt($row->id_warga) . '\')"><i class="fa fa-edit m-r-5"></i>Edit</a></li>
+
+                <li><a onclick=\'javascript: swal({
+                    title: "Are You Sure?",
+                    text: "Konfirmasi untuk menghapus data terpilih",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {    
+                    window.location = "' . base_url() . 'Warga/delete/' . en_crypt($row->id_warga) . '";
+                    } else {
+                    
+                    }
+                });\'><i class="fa fa-trash-o m-r-5"></i>Hapus</a></li>
+            </ul>
+        </div></center>';
+            $baris[] = "<center>" . $gambar . "</center>";
+            $baris[] = "<b>" . $row->nama_lengkap . "</b><br>
+            BLOK " . $row->nama_blok . "-NO. " . $row->no_rumah . "<br>
+            " . $row->status_menempati;
+            $data[] = $baris;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_Datatable->count_all(
+                'v_all_warga',
+                $column_order,
+                $column_search,
+                $order,
+                '*',
+                $kondisi
+            ),
+            "recordsFiltered" => $this->M_Datatable->count_filtered(
+                'v_all_warga',
+                $column_order,
+                $column_search,
+                $order,
+                '*',
+                $kondisi
+            ),
+            "data" => $data,
+        );
+        //output to json format
+
+        echo json_encode($output);
+    }
+
     public function Data_warga()
     {
         $this->hapus_session();
@@ -412,7 +495,6 @@ class Warga extends CI_Controller
 
 
         $tersedia = $this->DataHandle->getAllWhere($this->nama_tabel4, '*', "status = '1'AND id_warga != '" . $id_warga . "' AND id_blok='" . $id_blok . "' AND no_rumah = '" . $no_rumah . "'", "id_rumah ASC")->num_rows();
-        // var_dump($tersedia->id_warga);die;
 
         if ($tersedia > 0) {
             $result = [
