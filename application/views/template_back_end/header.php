@@ -27,6 +27,7 @@
   <?php
   }
   ?>
+  <script src="<?php echo base_url() ?>assets/plugins/components/jquery/dist/jquery.min.js"></script>
   <script>
     let base_url = '<?= base_url() ?>'
     let INI_DIA = '<?= $this->uri->segment(1) ?>';

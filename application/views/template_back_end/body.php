@@ -3,7 +3,6 @@
 <html lang="en">
 
 
-
 <?php echo $_head; ?>
 
 
@@ -62,7 +61,6 @@
 
     <!-- jQuery -->
 
-    <script src="<?php echo base_url() ?>assets/plugins/components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
 
