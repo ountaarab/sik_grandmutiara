@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Jabatan</label>
-                                <select name="jabatan" class="form-control">
+                                <select name="jabatan" class="form-control select2">
                                     <?php
                                     // Kondisi Ketua RW
                                     if ($hitung_ketuarw > 0) {
@@ -181,7 +181,7 @@ foreach ($data_pengurus->result() as $_pengurus) { ?>
                                 <input type="hidden" class="form-control" name="id_pengurus" value="<?= $_pengurus->id_pengurus ?>">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nama Warga</label>
-                                    <select name="id_warga" class="form-control">
+                                    <select name="id_warga" class="form-control select2">
                                         <option value="<?= $_pengurus->id_warga ?>"><?= $_pengurus->nama_lengkap ?> (BLOK <?= $_pengurus->nama_blok ?>-NO. <?= $_pengurus->no_rumah ?>)</option>
                                         <?php
                                         foreach ($warga_bukan_pengurus->result() as $_warga) { ?>
@@ -195,7 +195,7 @@ foreach ($data_pengurus->result() as $_pengurus) { ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Jabatan</label>
-                                    <select name="jabatan" class="form-control">
+                                    <select name="jabatan" class="form-control select2">
                                         <option value="<?= $_pengurus->jabatan ?>"><?= $_pengurus->jabatan ?></option>
                                         <?php
                                         // Kondisi Ketua RW
