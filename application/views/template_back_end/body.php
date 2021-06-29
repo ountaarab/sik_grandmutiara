@@ -268,17 +268,6 @@
 
     <script src="<?php echo base_url() ?>assets/plugins/components/dropzone-master/dist/dropzone.js"></script>
 
-    <script>
-        $(function() {
-
-            $('.textarea_editor').wysihtml5();
-            $(document).ready(function() {
-                view();
-            });
-
-        });
-    </script>
-
     <!-- PLUGIN WYSI END -->
 
     <!-- PLUGIN DROPIFY -->

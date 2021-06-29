@@ -34,3 +34,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #-------------------------
 # */config/database.php
 assets/plugins/foto/*
+ssh
+ssh/*

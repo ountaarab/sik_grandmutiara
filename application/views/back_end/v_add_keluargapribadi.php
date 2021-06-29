@@ -6,7 +6,7 @@
 
         <div class="white-box">
 
-            <button type="button" class="close" onclick="batal()">×</button>
+            <button type="button" class="btn btn-danger pull-right m-b-10" onclick="batal()"><i class="fa fa-reply"></i> Kembali</button>
 
             <div class="row">
 

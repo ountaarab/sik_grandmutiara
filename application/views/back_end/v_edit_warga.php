@@ -33,7 +33,7 @@ if ($foto == NULL) {
     <!-- Left sidebar -->
     <div class="col-md-12">
         <div class="white-box">
-            <button type="button" class="close" onclick="batal()">×</button>
+            <button type="button" class="btn btn-danger pull-right m-b-10" onclick="batal()"><i class="fa fa-reply"></i> Kembali</button>
             <div class="row">
                 <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/edit" method="post" class="form-horizontal row-fluid" autocomplete="off">
                     <div class="col-md-4 col-sm-6">
@@ -41,7 +41,7 @@ if ($foto == NULL) {
                         <div class="white-box text-center">
                             <center>
 
-                                <div class="form-group" id="foto_atlet">
+                                <div class="form-group" id="foto">
                                 </div>
                                 <!-- <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"> -->
                                 <h5>Foto</h5>
@@ -390,11 +390,11 @@ if ($foto == NULL) {
         <?php
         if ($foto != null) :
         ?>
-            $('#foto_atlet').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
+            $('#foto').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
         <?php
         else :
         ?>
-            $('#foto_atlet').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
+            $('#foto').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
 
         <?php
         endif;

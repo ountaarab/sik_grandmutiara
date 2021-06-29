@@ -1,12 +1,12 @@
             Dashboard
             <hr>
-                <?php echo $this->session->flashdata('msg'); ?>
+            <?php echo $this->session->flashdata('msg'); ?>
             <div class="row m-0">
                 <a href="<?= base_url() ?>Warga">
                     <div class="col-md-3 col-sm-6 col-xs-12 info-box">
                         <div class="media">
                             <div class="media-left">
-                                    <span class="icoleaf bg-primary text-white"><i class="mdi mdi-account-multiple"></i></span>
+                                <span class="icoleaf bg-primary text-white"><i class="mdi mdi-account-multiple"></i></span>
                             </div>
                             <div class="media-body">
                                 <h3 class="info-count text-blue"><?= $data_warga['jml'] ?></h3>
@@ -42,23 +42,23 @@
                 </div>
                 <a href="<?= base_url() ?>Pengurus">
                     <div class="col-md-3 col-sm-6 col-xs-12 info-box b-r-0">
-                            <div class="media">
-                                <div class="media-left">
-                                    <span class="icoleaf bg-danger text-white"><i class="mdi mdi-account-star"></i></span>
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="info-count text-blue"><?= $data_pengurus ?></h3>
-                                    <p class="info-text font-12">Pengurus</p>
-                                    <span class="hr-line"></span>
-                                </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <span class="icoleaf bg-danger text-white"><i class="mdi mdi-account-star"></i></span>
                             </div>
+                            <div class="media-body">
+                                <h3 class="info-count text-blue"><?= $data_pengurus ?></h3>
+                                <p class="info-text font-12">Pengurus</p>
+                                <span class="hr-line"></span>
+                            </div>
+                        </div>
                     </div>
                 </a>
                 <a href="<?= base_url() ?>User">
                     <div class="col-md-3 col-sm-6 col-xs-12 info-box">
                         <div class="media">
                             <div class="media-left">
-                                    <span class="icoleaf bg-success text-white"><i class="mdi mdi-account-multiple"></i></span>
+                                <span class="icoleaf bg-success text-white"><i class="mdi mdi-account-multiple"></i></span>
                             </div>
                             <div class="media-body">
                                 <h3 class="info-count text-blue"><?= $data_user['jml'] ?></h3>
@@ -68,6 +68,18 @@
                         </div>
                     </div>
                 </a>
+                <div class="col-md-3 col-sm-6 col-xs-12 info-box">
+                    <div class="media">
+                        <div class="media-left">
+                            <span class="icoleaf bg-danger text-white"><i class="mdi mdi-account-multiple"></i></span>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="info-count text-blue"><strong><?= $total_jiwa ?></strong></h3>
+                            <p class="info-text font-12">Jml Jiwa(tercatat sistem)</p>
+                            <span class="hr-line"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <br>
             <br>

@@ -1,5 +1,5 @@
-<?php echo $this->session->flashdata('msg'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/components/dropify/dist/css/dropify.min.css">
+<?php echo $this->session->flashdata('msg'); ?>
 <div class="row">
 
     <!-- Left sidebar -->
@@ -8,9 +8,8 @@
 
         <div class="white-box">
 
-            <button type="button" class="close" onclick="batal()">×</button>
-
             <div class="row">
+                <button type="button" class="btn btn-danger pull-right m-b-10" onclick="batal()"><i class="fa fa-reply"></i> Kembali</button>
 
                 <form enctype="multipart/form-data" id="form-ajax" action="<?php echo base_url() ?>Warga/add_keluarga" method="post" class="form-horizontal row-fluid" autocomplete="off">
 

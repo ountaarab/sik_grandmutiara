@@ -54,7 +54,7 @@ if ($foto == NULL) {
 
         <div class="white-box">
 
-            <button type="button" class="close" onclick="batal()">×</button>
+            <button type="button" class="btn btn-danger pull-right m-b-10" onclick="batal()"><i class="fa fa-reply"></i> Kembali</button>
 
 
             <div class="row">
@@ -69,7 +69,8 @@ if ($foto == NULL) {
 
                             <center>
 
-                                <input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" / <?= $gambar ?>>
+                                <div class="form-group" id="foto">
+                                </div>
 
                                 <h5>Foto</h5>
 
@@ -392,7 +393,24 @@ if ($foto == NULL) {
 <script src="<?= base_url() ?>assets/plugins/components/dropify/dist/js/dropify.min.js"></script>
 
 <script>
+    function change_file() {
+        $('#change-upload').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
+        $('.dropify').dropify();
+
+    }
     $(function() {
+        <?php
+        if ($foto != null) :
+        ?>
+            $('#foto').html('<div id="change-upload"><img class="img-responsive" src="' + base_url + 'assets/plugins/foto/<?= $foto ?>" alt="File Event"><br><br><button type="button" class="btn btn-outline btn-default" onclick="change_file();"><i class="fa fa-edit"></i> Ganti File</button></div>');
+        <?php
+        else :
+        ?>
+            $('#foto').html('<label class="col-sm-12" style="font-size: 11px">File upload <span style="color:red;">*gunakan format jpg, png atau jpeg</span></label><input name="userfile" id="input-file-now" class="dropify" type="file" accept=".jpg, .png, .jpeg, .JPG, .tiff|image/*"><br/><a onclick="batal();" class="btn btn-outline btn-default"><i class="icon  icon-action-undo"></i> Batalkan Perubahan</a>');
+
+        <?php
+        endif;
+        ?>
         $('.dropify').dropify();
         $('.dropify-fr').dropify({
             messages: {
