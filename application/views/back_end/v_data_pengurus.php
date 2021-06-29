@@ -1,6 +1,6 @@
+<link href="<?= base_url() ?>assets/plugins/components/custom-select/custom-select.css" rel="stylesheet" type="text/css" />
 <?php echo $this->session->flashdata('msg'); ?>
 
-<link href="<?= base_url() ?>assets/plugins/components/custom-select/custom-select.css" rel="stylesheet" type="text/css" />
 
 <div class="row">
     <div class="col-sm-12">
